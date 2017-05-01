@@ -16,35 +16,35 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 html, body, #app, #video-container {
@@ -75,4 +75,58 @@ html, body, #app, #video-container {
 body {
   background: black;
   color: white;
+  font-family: Righteous;
+}
+
+#metadata {
+  font-size: 26px;
+  position: fixed;
+  bottom: 3rem;
+  left: 0;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  /* width: 100%; */
+  min-width: 50%;
+}
+
+#metadata > * {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  margin: 3px;
+  background: white;
+  color: black;
+  border: 3px solid black;
+  height: 3rem;
+  padding-left: 20%;
+  position: relative;
+}
+
+#title { width: 100%; }
+#album { width: 80%; }
+#year { width: 60%; }
+
+#year {
+  font-size: 90%;
+  font-style: italic;
+}
+
+#album, #year, #title {
+  left: -100rem;
+  opacity: 0;
+  transition: left 1000ms ease-in-out;
+}
+
+#album {
+  text-transform: uppercase;
+}
+
+.slide-in {
+  left: 0rem !important;
+}
+
+.visible {
+  opacity: 1 !important;
 }

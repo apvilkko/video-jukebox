@@ -3,22 +3,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Kasarivideoboksi</title>
+  <title>Video Jukebox</title>
   <link rel="stylesheet" href="css/styles.css?v=1.0">
   <link href="//vjs.zencdn.net/5.11/video-js.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
-  <div id="app">
-    <div id="video-container">
-    </div>
-  </div>
 </head>
 
 <body>
+  <div id="app">
+    <div id="video-container">
+    </div>
+    <div id="metadata">
+      <div id="title"></div>
+      <div id="album"></div>
+      <div id="year"></div>
+    </div>
+  </div>
+
   <script src="//vjs.zencdn.net/5.19.2/video.js"></script>
   <script src="js/videos.js"></script>
+  <script src="js/metadata.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 </html>

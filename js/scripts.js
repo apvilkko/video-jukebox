@@ -40,6 +40,7 @@
       controls: false,
       autoplay: false,
       fluid: true,
+      muted: false,
     });
   }
 
@@ -56,16 +57,104 @@
     startVideo(list[currentIndex]);
   }
 
+  function getYear(filename) {
+    const yearMatch = filename.match(/\((\d{4})\)/);
+    if (yearMatch) {
+      return yearMatch[1];
+    }
+    return '';
+  }
+
+  function getMetadata(filename) {
+    if (METADATA[filename]) {
+      return METADATA[filename];
+    }
+    const match = filename.match(/[^_]+_(.*) - ([^(]+).*\.mp4/);
+    if (match && match.length > 1) {
+      return {
+        artist: match[1],
+        track: match[2],
+        year: getYear(filename),
+        album: match[2],
+      }
+    }
+    return {
+      artist: '',
+      track: filename,
+      year: '',
+      album: '',
+    };
+  }
+
+  function setText(id, text) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+  }
+
+  function setClass(id, className) {
+    const el = document.getElementById(id);
+    el.classList.add(className);
+  }
+  function removeClass(id, className) {
+    const el = document.getElementById(id);
+    el.classList.remove(className);
+  }
+
+  function showMetadata() {
+    setClass('title', 'visible');
+    setClass('album', 'visible');
+    setClass('year', 'visible');
+
+    setClass('title', 'slide-in');
+    setTimeout(() => {setClass('album', 'slide-in')}, 1000);
+    setTimeout(() => {setClass('year', 'slide-in')}, 2000);
+
+    setTimeout(() => {
+      removeClass('title', 'slide-in');
+      setTimeout(() => {removeClass('album', 'slide-in')}, 1000);
+      setTimeout(() => {removeClass('year', 'slide-in')}, 2000);
+
+      setTimeout(() => {
+        removeClass('title', 'visible');
+        removeClass('album', 'visible');
+        removeClass('year', 'visible');
+      }, 5000);
+
+    }, 5000);
+
+  }
+
+  function setMetadata(metadata) {
+    setText('title', '“' + metadata.track + '”');
+    setText('album', metadata.artist);
+    setText('year', metadata.album + ' (' + metadata.year + ')');
+  }
+
+  const METADATA_OFFSET = 10;
+
   function startVideo(url) {
     console.log('startVideo', url);
+    const metadata = getMetadata(url);
+    setMetadata(metadata);
+    let showIn = false;
+    let showOut = false;
     player.src('videos/' + url);
     player.ready(function () {
       player.play();
       timer = setInterval(function () {
-        if (player.remainingTime() < 2) {
+        const rem = player.remainingTime();
+        if (rem < 2) {
           player.pause();
           clearInterval(timer);
           nextVideo();
+        }
+        if (player.currentTime() > METADATA_OFFSET && !showIn) {
+          showIn = true;
+          showMetadata();
+        }
+        if (rem <= (METADATA_OFFSET + 5) && !showOut) {
+          showOut = true;
+          showMetadata();
         }
       }, 1000);
     });
