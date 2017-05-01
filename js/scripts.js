@@ -72,10 +72,10 @@
     const match = filename.match(/[^_]+_(.*) - ([^(]+).*\.mp4/);
     if (match && match.length > 1) {
       return {
-        artist: match[1],
-        track: match[2],
+        artist: match[1].trim(),
+        track: match[2].trim(),
         year: getYear(filename),
-        album: match[2],
+        album: match[2].trim(),
       }
     }
     return {
