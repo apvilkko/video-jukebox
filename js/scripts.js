@@ -132,6 +132,8 @@
 
   const METADATA_OFFSET = 10;
 
+  const DEBUG_METADATA = false;
+
   function startVideo(url) {
     console.log('startVideo', url);
     const metadata = getMetadata(url);
@@ -152,8 +154,8 @@
           showIn = true;
           showMetadata();
         }
-        if (rem <= (METADATA_OFFSET + 5) && !showOut) {
-          showOut = true;
+        if ((rem <= (METADATA_OFFSET + 5) || (DEBUG_METADATA && Math.round(rem) % 10 === 0)) && !showOut) {
+          showOut = DEBUG_METADATA ? false : true;
           showMetadata();
         }
       }, 1000);
@@ -167,7 +169,12 @@
     startVideo(list[currentIndex]);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  function onClick() {
     main();
+    document.removeEventListener('click', onClick);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', onClick);
   });
 })();

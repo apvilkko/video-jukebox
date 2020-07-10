@@ -79,15 +79,15 @@ body {
 }
 
 #metadata {
-  font-size: 26px;
+  font-size: 4vw;
   position: fixed;
-  bottom: 3rem;
+  bottom: 4vw;
   left: 0;
   z-index: 10;
   margin: 0;
   padding: 0;
   /* width: 100%; */
-  min-width: 50%;
+  min-width: 55%;
 }
 
 #metadata > * {
@@ -95,26 +95,26 @@ body {
   display: flex;
   align-items: center;
   opacity: 0.8;
-  margin: 3px;
+  margin: 0.4vw;
   background: white;
   color: black;
   border: 3px solid black;
-  height: 3rem;
+  height: 5.5vw;
   padding-left: 20%;
   position: relative;
 }
 
 #title { width: 100%; }
 #album { width: 80%; }
-#year { width: 60%; }
+#year { min-width: 60%; }
 
 #year {
-  font-size: 90%;
+  font-size: 70%;
   font-style: italic;
 }
 
 #album, #year, #title {
-  left: -100rem;
+  left: -90vw;
   opacity: 0;
   transition: left 1000ms ease-in-out;
 }
