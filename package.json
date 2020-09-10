@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/apvilkko/video-jukebox#readme",
   "devDependencies": {
-    "node-fetch": "^1.6.3"
+    "node-fetch": "^2.6.1"
   }
 }
